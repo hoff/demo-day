@@ -57,7 +57,7 @@ label {
 }
 
 .form-section {
-	margin-top: 20px;
+	margin-top: 21px;
 }
 
 .form-input-row {
@@ -169,15 +169,14 @@ label {
 	border-bottom: 2px solid black;
 }
 
-
 ::placeholder { /* Most modern browsers support this now. */
-	color:    #ddd;
+	color: #ddd;
  }
 
- input[type=checkbox] {
+input[type=checkbox] {
 	transform: scale(1.5);
 	-ms-transform: scale(1.5); /* IE */
 	-moz-transform: scale(1.5); /* FF */
 	-webkit-transform: scale(1.5); /* Safari and Chrome */
 	-o-transform: scale(1.5); /* Opera */
-  }
+}
