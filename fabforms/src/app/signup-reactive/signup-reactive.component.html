@@ -1,3 +1,215 @@
-<h1>A fabulous signup form</h1>
 
-<p>Here we go</p>
+
+<flex-row-center class="page">
+    
+<flex-col class="max-content-width">
+
+  <!-- FACEBOOK SIGNUP BUTTON -->
+  <flex-row class="signup-facebook-button">
+    <i class="fa fa-facebook" aria-hidden="true"></i>
+    <flex-row-center-center style="flex-grow: 1;">Über Facebook registrieren</flex-row-center-center>
+  </flex-row>
+
+  <!-- DIVIDER -->
+  <flex-row class="signup-facebook-divider" >
+    <flex-row class="signup-facebook-divider__side"></flex-row>
+    <flex-row-center class="signup-facebook-divider__center" >ODER OHNE FACEBOOK</flex-row-center>
+    <flex-row class="signup-facebook-divider__side"></flex-row>
+  </flex-row>
+
+  <!-- SIGNUP FORM -->
+  <form [formGroup]="signupForm" class="signup-form" novalidate
+    (submit)="submit()"
+  >
+
+    <!-- FIRST NAME [ngStyle]="{'border-color': firstname.invalid && !firstname.pristine ? 'red': 'gray'}" -->
+    <flex-col class="form-section">
+      <label class="form-label" for="signup-firstname-input">VORNAME</label>
+      
+      <relative-container>
+        <flex-row>
+          <!-- icon -->
+          <flex-col-center-center class="form-input-icon">
+              <i class="fa fa-user" aria-hidden="true"></i>
+          </flex-col-center-center>
+          <!-- input -->
+          <flex-row-center-center class="right-frame" 
+          [class.border-warning]="firstname.invalid && (firstname.dirty || firstname.touched || showMessages)"
+          >
+            <input id="signup-firstname-input" class="form-input-element" formControlName="firstname" autocomplete="given-name">
+          </flex-row-center-center>
+        </flex-row>
+
+        <!-- Warning -->
+        <absolute-container class="message-container">
+          <relative-container *ngIf="firstname.invalid && (firstname.dirty || firstname.touched || showMessages)">
+              <div class="arrow_box">muss augefüllt werden</div>
+          </relative-container>
+        </absolute-container>
+
+      </relative-container>
+    </flex-col><!-- end of firstname -->
+
+    <!-- last name -->
+    <flex-col class="form-section">
+        <label class="form-label" for="signup-lastname-input">NACHNAME</label>
+        
+        <relative-container>
+          <flex-row>
+            <!-- icon -->
+            <flex-col-center-center class="form-input-icon">
+                <i class="fa fa-user" aria-hidden="true"></i>
+            </flex-col-center-center>
+            <!-- input -->
+            <flex-row-center-center class="right-frame" 
+              [class.border-warning]="lastname.invalid && (lastname.dirty || lastname.touched || showMessages)">
+              <input id="signup-lastname-input" class="form-input-element" formControlName="lastname" autocomplete="family-name">
+            </flex-row-center-center>
+            </flex-row>
+    
+          <!-- Warning -->
+          <absolute-container class="message-container" *ngIf="lastname.invalid && (lastname.dirty || lastname.touched || showMessages)">
+          <relative-container>
+              <div class="arrow_box">muss augefüllt werden</div>
+          </relative-container>
+          </absolute-container>
+
+      </relative-container>
+      </flex-col><!-- end of last name -->
+
+    <!-- user name -->
+    <flex-col class="form-section">
+        <label class="form-label" for="signup-username-input">MITGLIEDSNAME</label>
+        
+        <relative-container>
+          <flex-row>
+            <!-- icon -->
+            <flex-col-center-center class="form-input-icon">
+                <i class="fa fa-user" aria-hidden="true"></i>
+            </flex-col-center-center>
+            <!-- input -->
+            <flex-row-center-center class="right-frame" 
+              [class.border-warning]="username.invalid && !username.pristine">
+              <input id="signup-username-input" class="form-input-element" formControlName="username" autocomplete="off"
+                placeholder="Dein Mitgliedsname ist öffentlich"
+              >
+          </flex-row-center-center>
+          </flex-row>
+    
+          <!-- Warning -->
+          <absolute-container class="message-container" *ngIf="username.invalid && (username.dirty || username.touched || showMessages)">
+          <relative-container>
+              <div class="arrow_box">muss augefüllt werden</div>
+          </relative-container>
+          </absolute-container>
+          
+      </relative-container>
+      </flex-col><!-- end of user name -->
+
+    <!-- email -->
+    <flex-col class="form-section">
+        <label class="form-label" for="signup-email-input">E-MAIL</label>
+        
+        <relative-container>
+          <flex-row>
+            <!-- icon -->
+            <flex-col-center-center class="form-input-icon">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+            </flex-col-center-center>
+            <!-- input -->
+            <flex-row-center-center class="right-frame"
+              [class.border-warning]="email.invalid && !email.pristine"
+            >
+            <input id="signup-email-input" class="form-input-element" formControlName="email" autocomplete="email">
+            </flex-row-center-center>
+          </flex-row>
+            
+    
+          <!-- Warning -->
+          <absolute-container class="message-container" *ngIf="email.invalid && (email.dirty || email.touched || showMessages)">
+          <relative-container>
+              <div class="arrow_box">eine gültige Email ist erforderlich</div>
+          </relative-container>
+          </absolute-container>
+          
+      </relative-container>
+      </flex-col><!-- end of email -->
+
+      <!-- password  -->
+    <flex-col class="form-section">
+        <label class="form-label" for="signup-password-input">PASSWORT</label>
+        
+        <relative-container>
+          <flex-row>
+            <!-- icon -->
+            <flex-col-center-center class="form-input-icon">
+                <i class="fa fa-lock" aria-hidden="true"></i>
+            </flex-col-center-center>
+
+            <flex-row-center-center 
+              class="right-frame" 
+              [class.border-warning]="username.invalid && !username.pristine">
+
+              <!-- input -->
+              <input id="signup-password-input" class="form-input-element" 
+              [type]="passwordVisible ? 'text' : 'password'"
+              formControlName="password" autocomplete="off"
+              >
+              <!-- tick -->
+              <flex-row-center-center class="form-show-password" style="flex-grow:1; white-space: nowrap;">
+                <input id="signup-show-password" type="checkbox" (change)="checkPasswordVisibility($event)" #showPasswordCheckbox/>
+                <label class="form-label" class="center-block" for="signup-show-password">Anzeigen</label>
+              </flex-row-center-center>
+
+          </flex-row-center-center>
+          </flex-row>
+    
+          <!-- Warning -->
+          <absolute-container class="message-container" *ngIf="password.invalid && (password.dirty || password.touched || showMessages)">
+            <relative-container>
+                <div class="arrow_box">muss augefüllt werden</div>
+            </relative-container>
+          </absolute-container>
+          
+      </relative-container>
+      </flex-col><!-- end of password -->
+
+  <!-- terms -->  
+    <div class="form-section">
+      <flex-row>
+          <div>
+              <input 
+              id="signup-accept-terms"
+              type="checkbox" formControlName="terms">
+          </div>
+          
+          <flex-row>
+              <label for="signup-accept-terms" class="signup-terms-text">
+                  Ich willige in die Verarbeitung und Nutzung meiner Daten gemäß der <a href="abg">Datenschutzerklärung</a> ein.
+                </label>
+          </flex-row>
+        
+      </flex-row>
+      <!-- Warning -->
+      <relative-container style="width: 100%;">
+          <absolute-container class="message-container" *ngIf="terms.invalid && (terms.dirty || terms.touched || showMessages)">
+            <relative-container>
+              <div class="arrow_box">muss markiert sein</div>
+            </relative-container>
+          </absolute-container>
+      </relative-container>
+    </div>
+
+
+    <button type="submit"
+      class="form-register-button">
+      Jetzt registrieren
+    </button>
+    <!-- 
+      [disabled]="signupForm.status !== 'VALID'"  
+    -->
+  </form>
+
+
+</flex-col> <!-- end of content width -->
+</flex-row-center><!-- end of page -->
